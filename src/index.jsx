@@ -1,17 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+import { MainView } from './components/main-view/main-view';
+
 import './index.scss';
 
 // Main component (will eventually use all the others)
 class FastFlixApplication extends React.Component {
 	render() {
-		return (
-			<div className="fast-flix">
-			<div>Good morning</div>
-			</div>
-		);
-	}
+		return <MainView />;
+  }
 }
 
 // Finds the root of the app
