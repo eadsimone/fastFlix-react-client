@@ -19,7 +19,7 @@ export function LoginView(props) {
 	};
 	
 	return (
-		<>
+		<div>
 			<Form className='login-form'>
 				<h1 className='login-header'>Log in:</h1>
 				<Form.Group controlId='formBasicEmail'>
@@ -37,13 +37,12 @@ export function LoginView(props) {
 					type='password'
 					value={password}
 					onChange={(e) => setPassword(e.target.value)}
-					type='password'
 					placeholder='Your password here!'
 					/>
 				</Form.Group>
 				<Button onClick={handleSubmit} variant='dark' type='submit'>Submit</Button>
 			</Form>
-		</>
+		</div>
 	);
 }
 

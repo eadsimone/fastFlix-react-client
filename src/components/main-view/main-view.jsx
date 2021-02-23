@@ -103,7 +103,7 @@ export class MainView extends React.Component {
 						<MovieView
 						movie={selectedMovie}
 						onClick={() => this.onButtonClick()}
-					/>
+						/>
 					) : (
 						<Container>
 							<Row>
@@ -119,6 +119,7 @@ export class MainView extends React.Component {
 							</Row>
 						</Container>
 					)}
+					</div>
 				</div>
 			</React.Fragment>
 		);
