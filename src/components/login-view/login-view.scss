@@ -1,8 +1,32 @@
-.login-form {
-	margin: 20px;
-	padding: 30px;
+@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+
+body {
+	font-family: 'Lato', sans-serif;
 }
 
-.login-header {
+h2 {
+	font-size: 300%;
 	text-align: center;
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+h3 {
+	font-size: 120%;
+	text-align: center;
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+form {
+	width: 500px;
+	margin: auto;
+}
+
+.login-button {
+	margin: auto;
+}
+
+.register-button {
+	margin-left: 10px;
 }
