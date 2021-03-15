@@ -1,11 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+
+body {
+  font-family: 'Lato', sans-serif;
+}
+
 .movie-card {
-	margin: 10px 0px;
-}
-
-.movie-img {
-  padding: 5px;
-}
-
-.more-button {
-  margin-top: 10px;
+  display: inline-flex;
+  margin: 20px;
 }

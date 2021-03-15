@@ -1,7 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import axios from 'axios';
+import { Link } from 'react-router-dom';
 
-import { Card, Button } from 'react-bootstrap';
+import Button from 'react-bootstrap/Button';
 
 import './movie-view.scss';
 
@@ -11,24 +13,56 @@ export class MovieView extends React.Component {
 		
 		this.state = {};
 	}
-	
+	addToFavoriteMovies(movie) {
+		const token = localStorage.getItem('token');
+		const userId = localStorage.getItem('user');
+		axios.post(`https://fastflixdb.herokuapp.com/users/${userId}/favorites/${movie._id}`,
+			{ username: localStorage.getItem('user') },
+			{
+				headers: { Authorization: `Bearer ${token}` },
+			}).then((res) => {
+				console.log(res);
+				alert('This movie is now in your favorites!');
+			});
+		}
+		
 	render() {
 		const { movie, onClick } = this.props;
 		
 		if (!movie) return null;
-	
+		
 		return (
-			<div className='movie-view'>
-				<Card>
-					<Card.Img className='movie-poster' variant="top" src={movie.ImageURL} />
-					<Card.Title className='label-title'>{movie.Title}</Card.Title>
-					<Card.Body>
-						<Card.Text className='label-body'>{movie.Description}</Card.Text>
-						<Card.Text className='label-body'>Director: {movie.Director.Name}</Card.Text>
-						<Card.Text className='label-body'>Genre: {movie.Genre.Name}</Card.Text>
-					</Card.Body>
-					<Button className='return-button' variant='dark' onClick={() => onClick(movie)}>Return to Movie List</Button>
-				</Card>
+			<div className="movie-view">
+				<h2>{movie.Title}</h2>
+				<section className="movie-posters">
+					<img className="movie-poster" src={movie.ImagePath} width={300} height={450} />
+				</section>
+				<section>
+					<div className='favorite-button'>
+						<Button onClick={() => this.addToFavoriteMovies(movie)} className="button-add-favorite" style={{ background: '#1289f6' }}>Add to your favorites</Button>
+					</div>
+				</section>
+				<section className="movie-info">
+					<div className="movie-description">
+						<span className="label">Description: </span>
+						<span className="value">{movie.Description}</span>
+					</div>
+					<div className="genre">
+						<span className="label">Genre:</span>
+						<Link to={`/genres/${movie.Genre.Name}`}>
+							<Button className="genre-button" variant="link">{movie.Genre.Name}</Button>
+						</Link>
+					</div>
+					<div className="director">
+						<span className="label">Director:</span>
+						<Link to={`/directors/${movie.Director.Name}`}>
+							<Button className="director-button" variant="link">{movie.Director.Name}</Button>
+						</Link>
+					</div>
+					<Link to={"/"}>
+						<Button className="back-button" variant="secondary">Back</Button>
+					</Link>
+				</section>
 			</div>
 		);
 	}
@@ -37,19 +71,17 @@ export class MovieView extends React.Component {
 MovieView.propTypes = {
 	movie: PropTypes.shape({
 		Title: PropTypes.string.isRequired,
-		Description: PropTypes.string,
-		Year: PropTypes.number,
-		ImageURL: PropTypes.string.isRequired,
+		Description: PropTypes.string.isRequired,
+		ImagePath: PropTypes.string.isRequired,
 		Genre: PropTypes.shape({
-			Name: PropTypes.string,
-			Biography: PropTypes.string 
+			Name: PropTypes.string.isRequired,
+			Description: PropTypes.string.isRequired
 		}),
 		Director: PropTypes.shape({
-			Name: PropTypes.string,
-			Bio: PropTypes.string,
-			Birthday: PropTypes.string
-		}),
-		Featured: PropTypes.bool
-	}).isRequired,
-	onClick: PropTypes.func.isRequired
+			Name: PropTypes.string.isRequired,
+			Bio: PropTypes.string.isRequired,
+			Birth: PropTypes.string.isRequired,
+			Death: PropTypes.string
+		})
+	})
 };
