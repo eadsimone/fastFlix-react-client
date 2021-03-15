@@ -13,7 +13,8 @@ export class MovieView extends React.Component {
 		
 		this.state = {};
 	}
-	addToFavoriteMovies(movie) {
+	
+	addToFavorites(movie) {
 		const token = localStorage.getItem('token');
 		const userId = localStorage.getItem('user');
 		axios.post(`https://fastflixdb.herokuapp.com/users/${userId}/favorites/${movie._id}`,
@@ -22,7 +23,7 @@ export class MovieView extends React.Component {
 				headers: { Authorization: `Bearer ${token}` },
 			}).then((res) => {
 				console.log(res);
-				alert('This movie is now in your favorites!');
+				alert('That movie is now in your favorites!');
 			});
 		}
 		
@@ -39,7 +40,7 @@ export class MovieView extends React.Component {
 				</section>
 				<section>
 					<div className='favorite-button'>
-						<Button onClick={() => this.addToFavoriteMovies(movie)} className="button-add-favorite" style={{ background: '#1289f6' }}>Add to your favorites</Button>
+						<Button onClick={() => this.addToFavorites(movie)} className="button-add-favorite" style={{ background: '#690f38' }}>Add to favorites</Button>
 					</div>
 				</section>
 				<section className="movie-info">
@@ -82,6 +83,6 @@ MovieView.propTypes = {
 			Bio: PropTypes.string.isRequired,
 			Birth: PropTypes.string.isRequired,
 			Death: PropTypes.string
-		})
+		}),
 	})
-};
+}

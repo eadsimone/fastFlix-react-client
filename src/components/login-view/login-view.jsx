@@ -5,10 +5,8 @@ import { Link } from 'react-router-dom';
 
 import { RegistrationView } from '../registration-view/registration-view';
 
-import {
-	Button,
-	Form
-} from 'react-bootstrap';
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
 
 import './login-view.scss';
 
@@ -33,12 +31,12 @@ export function LoginView(props) {
 		.then(response => {
 			const data = response.data;
 			props.onLoggedIn(data);
-			console.log('You are in!')
+			console.log('Successful login')
 		})
 		.catch(e => {
 			console.log('No such user')
 		});
-	}
+	};
 	
 	return (
 		<div className="login-view">

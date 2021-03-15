@@ -3,13 +3,11 @@ import PropTypes from 'prop-types';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
-import {
-	Container,
-	Button,
-	Card,
-	Row,
-	Col
-} from 'react-bootstrap';
+import Container from 'react-bootstrap/Container';
+import Button from 'react-bootstrap/Button';
+import Card from 'react-bootstrap/Card';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 
 import './profile-view.scss';
 
@@ -62,25 +60,24 @@ export class ProfileView extends React.Component {
 		const token = localStorage.getItem('token');
 		const userId = localStorage.getItem('user');
 		
-		axios.delete(`https://fastflixdb.herokuapp.com/users/${userId}`, {
+		axios.delete(`https://thefastFlixapi.herokuapp.com/users/${userId}`, {
 			headers: { Authorization: `Bearer ${token}` }
 		})
 		.then(res => {
-			alert('Are you sure you want to delete your account?')
-		})
-		.then(res => {
-			alert('Account successfully deleted')
-		})
-		.then(res => {
-			localStorage.removeItem('token');
-			localStorage.removeItem('user');
-			
-			this.setState({
-				user: null
-			});
-			
-			window.open('/', '_self');
-		})
+		alert('Do you really want to delete your account?')
+	})
+	.then(res => {
+		alert('Account successfully deleted')
+	})
+	.then(res => {
+		localStorage.removeItem('token');
+		localStorage.removeItem('user');
+		
+		this.setState({
+			user: null
+		});
+		window.open('/', '_self');
+	})
 		.catch(e => {
 			alert('Account could not be deleted ' + e)
 		});
@@ -90,7 +87,7 @@ export class ProfileView extends React.Component {
 		const token = localStorage.getItem('token');
 		const userId = localStorage.getItem('user');
 		
-		axios.delete(`https://fastflixdb.herokuapp.com/users/${userId}/favorites/${movie._id}`, {
+		axios.delete(`https://fastflixdb.herokuapp.com/users/${userId}/Movies/${movie._id}`, {
 			headers: { Authorization: `Bearer ${token}` }
 		})
 		.then((res) => {
@@ -108,19 +105,19 @@ export class ProfileView extends React.Component {
 			<Container>
 				<Container>
 					<h2 className="profile-title">Your Profile</h2>
-					<Card style={{ width: '50rem' }} className="profile-card">
+					<Card style={{ width: '50rem' }} className="profile-view">
 						<Card.Body>
 							<Card.Text className='profile-text'>Username: {this.state.Username}</Card.Text>
 							<Card.Text className='profile-text'>Email: {this.state.Email}</Card.Text>
 							<Card.Text className='profile-text'>Birthday: {this.state.Birthday}</Card.Text>
 							<div className='profile-buttons'>
-							<Link to={'/users/:userId/update'}>
-								<Button variant="success" className='profile-button'>Update Profile</Button>
-							</Link>
-							<Button variant='danger' onClick={() => this.deleteUser()} className='profile-button'>Delete Profile</Button>
-							<Link to={'/'}>
-								<Button className='profile-button' variant='secondary'>Go Back</Button>
-							</Link>
+								<Link to={'/users/:userId/update'}>
+									<Button variant="success" className='profile-button'>Update Profile</Button>
+								</Link>
+								<Button variant='danger' onClick={() => this.deleteUser()} className='profile-button'>Delete Profile</Button>
+								<Link to={'/'}>
+									<Button className='profile-button' variant='secondary'>Go Back</Button>
+								</Link>
 							</div>
 						</Card.Body>
 					</Card>

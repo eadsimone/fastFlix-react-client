@@ -1,21 +1,28 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
+import { devToolsEnhancer } from 'redux-devtools-extension';
 
-import { MainView } from './components/main-view/main-view';
+import MainView from './components/main-view/main-view';
+import moviesApp from './reducers/reducers';
 
 import './index.scss';
 
-// Main component (will eventually use all the others)
+const store = createStore(moviesApp, devToolsEnhancer());
+
 class FastFlixApplication extends React.Component {
 	render() {
 		return (
-			<MainView />
+			<Provider store={store}>
+				<MainView />
+			</Provider>
 		);
 	}
 }
 
-// Finds root of app
+// Finds root of the app
 const container = document.getElementsByClassName('app-container')[0];
 
-// Tells React to render app in root DOM element
+// Tells React to render the app in the root DOM element
 ReactDOM.render(React.createElement(FastFlixApplication), container);

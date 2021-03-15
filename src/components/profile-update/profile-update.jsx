@@ -3,10 +3,8 @@ import PropTypes from 'prop-types';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
-import {
-	Form,
-	Button
-} from 'react-bootstrap';
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
 
 import './profile-update.scss';
 
@@ -28,25 +26,25 @@ export function ProfileUpdate(props) {
 			Email: email,
 			Birthday: birthday
 		},
-		{
-			headers: { Authorization: `Bearer ${token}` }
-		})
-		.then((res) => {
-			const data = res.data;
-			localStorage.setItem('user', data.Username);
-			console.log('Profile updated successfully');
-			alert('Your profile has been updated!');
+			{
+				headers: { Authorization: `Bearer ${token}` }
+			})
+			.then((res) => {
+				const data = res.data;
+				localStorage.setItem('user', data.Username);
+			console.log('Profile updated');
+			alert('Your profile has been updated');
 			window.open('/users/userId', '_self');
 		})
 		.catch(e => {
 			console.log('Something went wrong');
-			alert('Error while updating profile');
+			alert('Something went wrong');
 		});
 	};
-	
+
 	return (
 		<div className="profile-update">
-			<h2>Update Your fastFlix Profile</h2>
+			<h2>Update Your Profile</h2>
 			
 			<Form className="update-form">
 				<Form.Group controlId="formBasicUsername" className="update-item">
